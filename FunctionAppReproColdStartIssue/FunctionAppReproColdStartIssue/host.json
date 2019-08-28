@@ -1,0 +1,81 @@
+{
+  "version": "2.0",
+  "aggregator": {
+    "batchSize": 1000,
+    "flushTimeout": "00:00:30"
+  },
+  "extensions": {
+    "http": {
+      "routePrefix": "",
+      "maxOutstandingRequests": 200,
+      "maxConcurrentRequests": 100,
+      "dynamicThrottlesEnabled": true
+    },
+    "queues": {
+      "maxPollingInterval": "00:00:05",
+      "visibilityTimeout": "00:00:00",
+      "batchSize": 1,
+      "maxDequeueCount": 5,
+      "newBatchThreshold": 1
+    },
+    "serviceBus": {
+      "maxConcurrentCalls": 16,
+      "prefetchCount": 100
+    },
+    "eventHub": {
+      "maxBatchSize": 1000,
+      "prefetchCount": 100
+    },
+    "durableTask": {
+      "HubName": "QDef",
+      "ControlQueueBatchSize": 32,
+      "PartitionCount": 4,
+      "ControlQueueVisibilityTimeout": "00:05:00",
+      "WorkItemQueueVisibilityTimeout": "00:05:00",
+      "MaxConcurrentActivityFunctions": 10,
+      "MaxConcurrentOrchestratorFunctions": 10,
+      "AzureStorageConnectionStringName": "AzureWebJobsStorage",
+      "TraceInputsAndOutputs": false,
+      "LogReplayEvents": false,
+      "EventGridTopicEndpoint": "",
+      "EventGridKeySettingName": "",
+      "EventGridPublishRetryCount": 3,
+      "EventGridPublishRetryInterval": "00:00:30",
+      "extendedSessionsEnabled": true,
+      "extendedSessionIdleTimeoutInSeconds": 30,
+      "maxQueuePollingInterval": "00:00:01"
+    }
+  },
+  "watchDirectories": [ "Shared", "bin" ],
+  "healthMonitor": {
+    "enabled": true,
+    "healthCheckInterval": "00:00:10",
+    "healthCheckWindow": "00:02:00",
+    "healthCheckThreshold": 6,
+    "counterThreshold": 0.80
+  },
+  "functionTimeout": "00:10:00",
+  "logging": {
+    "logLevel": {
+      "default": "Trace",
+      "Host": "Trace",
+      "Host.Results": "Trace",
+      "Host.Aggregator": "Trace",
+      "Host.Triggers.DurableTask": "Trace",
+      "Function": "Trace"
+    },
+    "applicationInsights": {
+      "sampling": {
+        "isEnabled": true,
+        "maxTelemetryItemsPerSecond": 30
+      }
+    }
+  },
+  "singleton": {
+    "lockPeriod": "00:00:15",
+    "listenerLockPeriod": "00:01:00",
+    "listenerLockRecoveryPollingInterval": "00:01:00",
+    "lockAcquisitionTimeout": "00:01:00",
+    "lockAcquisitionPollingInterval": "00:00:03"
+  }
+}
